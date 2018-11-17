@@ -1,12 +1,14 @@
 
 /**
- * Write a description of class Funktionen here.
+ * Klasse Funktionen
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author JKrier, JVogt
+ * @version Ueb03
  */
 public class Funktionen
-{
+{   
+    private static final String msg1 = "Hier bitte eine positive ganze Zahl eingeben.";
+    private static final String msg2 = "Hier bitte eine neunstellige Zahl eingeben.";
     /**
      * Standardkonstruktor der Klasse Funktionen
      */
@@ -22,7 +24,7 @@ public class Funktionen
      */
     public static int berechneTeilersumme(int y)
     {
-        check((y>=0),"Eingegebene Zahl ist keine natuerliche Zahl!");
+        check((y>=0),msg1);
         int i, teilersumme;      
         
         for(i =1,teilersumme=0;i*i<y;i++)
@@ -45,11 +47,8 @@ public class Funktionen
     public static String berechnePruefziffer(long isbn)
     {
        String s =String.valueOf(isbn);
-       while (s.length()<9)
-       {
-           s = "0"+s;
-        }
-       check(((isbn > 0) && (isbn < 999999999) && (s.length()==9)),"Eingegebene Zahl ist keine gueltige ISBN");
+       
+       check(((isbn > 0) && (isbn < 999999999) && (s.length()==9)),msg2);
        
        long summe=0;
        for(int i=9;i>0;i--)
@@ -68,7 +67,6 @@ public class Funktionen
          }
     }
 
-      
     /**
      * Dritte Funktion: Nullstellen fuer quadtratische Gleichung berechnen mittels p-q Formel. Fall: D>0: Es gibt 2 reelle Nullstellen.
      *
@@ -83,9 +81,10 @@ public class Funktionen
         nullstelle1 = -(p/2)- Math.sqrt((p/2)*(p/2)-q);
         nullstelle2 = -(p/2)+ Math.sqrt((p/2)*(p/2)-q);
                      
-        String nullstelle="Nullstellen sind ("+nullstelle1+"|0) und ("+nullstelle2+"|0).";
+        String nullstelle="Nullstellen sind: "+nullstelle1+" und "+nullstelle2;
         return nullstelle;
     }
+    
     /**
      * Dritte Funktion: Nullstellen fuer quadtratische Gleichung berechnen mittels p-q Formel. Fall: D=0: Es gibt 1 Nullstelle.
      *
@@ -96,9 +95,10 @@ public class Funktionen
     {
         double nullstelleDoppelt = -(p/2.0);
                      
-        String doppelteNullstelle="Doppelte Nullstelle bei: ("+nullstelleDoppelt+"|0)";
+        String doppelteNullstelle="Doppelte Nullstelle bei: "+nullstelleDoppelt;
         return doppelteNullstelle;
     }
+    
     /**
      * Check-Methode um Fehler zu erkennen und als 
      * IllegalArgumentException auszuwerfen.
@@ -108,7 +108,5 @@ public class Funktionen
         if (!bedingung)
            throw new IllegalArgumentException(error);
     }
-    
-    
-   
+  
 }
