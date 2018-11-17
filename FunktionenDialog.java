@@ -1,14 +1,16 @@
-import java.util.Scanner;
+import java.util.*;
 /**
  * Klasse FunktionenDialog: Interative Testklasse der Klasse Funktionen.
  *
- * @author JKrier
+ * @author JKrier, JVogt
  * @version Ueb03
  */
 public class FunktionenDialog
 {
-    public Funktionen funktion;
-    public Scanner input;
+    public Funktionen   funktion;
+    public Scanner      input;
+    private final String msg1 = "\nHier eine positive ganze Zahl eingeben.";
+    private final String msg2 ="\nHier eine rationale Zahl eingeben.";
     /**
      * Konstruktor.
      */
@@ -23,56 +25,57 @@ public class FunktionenDialog
      */
     
     public void run()
-    {
+     {
         int wahl=1;
                               
      
-     while ( wahl != 0 )
-     {
-         wahl = readlnInt("\n Bitte waehlen Sie aus: "+
+       while ( wahl != 0 )
+       {
+          wahl = readlnInt("\n Bitte waehlen Sie aus: "+
                           "\n 1) Teilersummenergebnis berechnen = 1"+
                           "\n 2) ISBN Pruefziffer berechnen = 2"+
                           "\n 3) Nullstellen einer quadratischen Gleichung berechnen = 3"+
                           "\n Ende = 0\n");
-      try
+                          
+        try
         {
            
-         System.out.println ("");
-         switch (wahl)
-           {
-            case 0:
+          System.out.println ("");
+          switch (wahl)
+          {
+             case 0:
                  System.out.println("Ende");
                  break;
-            case 1:
+             case 1:
                  System.out.println("\nTeilersumme = "+funktion.berechneTeilersumme(zahl()));
                  break;
-            case 2:
+             case 2:
                  System.out.println("\n"+funktion.berechnePruefziffer(isbn()));
                  break;
-            case 3:
+             case 3:
                  System.out.println(gleichung());
                  break;
             
-            default:
+             default:
                  System.out.println("Ungueltige Eingabe!");
                  break;
-           }
+          }
         }
-      catch (AssertionError ae)
+        catch (AssertionError ae)
         {
-         System.err.println(ae);
+            System.err.println(ae);
         } 
-      catch ( NumberFormatException nfe)
+        catch ( NumberFormatException nfe)
         {  
-         System.err.println(nfe);                           
+            System.err.println(nfe);                           
         }       
-      catch ( RuntimeException rex)
+        catch ( RuntimeException rex)
         {  
-         System.err.println(rex);
+            System.err.println(rex);
         } 
-     
-      }                   
+       }                   
      }
+     
     /**
      * Methode zahl() dient zum Einlesen des Parameters fuer die Berechnung der Teilersumme.
      * @return: Parameterwert fuer Methode berechneTeilersumme(zahl()).
@@ -95,6 +98,7 @@ public class FunktionenDialog
          
          return isbn;
      }
+     
      /**
      * Methode gleichung() dient zur Fallunterscheidung, welche Nullstellenart vorliegt
      * und gibt -sofern es keine komplexe Nullstellen sind- die Nullstellen durch Methodenaufruf als String zurueck. 
@@ -112,7 +116,7 @@ public class FunktionenDialog
          {
              ergebnis=funktion.berechneNullstellen(p,q);
          }
-         if (d == 0.0)
+         if (d > -0.000000000000001 && d<0.000000000000001)
          {
              ergebnis=funktion.berechneNullstelle(p);
          }
@@ -120,9 +124,9 @@ public class FunktionenDialog
          {
              ergebnis = "\nKomplexe Nullstelle!";
          }
-         System.out.println("D= "+ d);
          return ergebnis;
      }
+     
      /**
      * Methode p() dient zum Einlesen Variable p fuer die p-q-Formel
      * @return: Parameterwert fuer Methode gleichung().
@@ -133,6 +137,7 @@ public class FunktionenDialog
          p = readlnDouble("Zahl p eingeben: ");
          return p;
      }
+     
      /**
      * Methode q() dient zum Einlesen Variable q fuer die p-q-Formel
      * @return: Parameterwert fuer Methode gleichung().
@@ -149,13 +154,23 @@ public class FunktionenDialog
      * @param String eingabe
      * @return: eingelesener int wert
      */
-     private int readlnInt(String eingabe)
-     {
-        System.out.print(eingabe);
-        int wert = input.nextInt();
-        input.nextLine();
+      private int readlnInt(String eingabe)
+      {
+        int wert = 0;
+        try 
+        {
+            System.out.print(eingabe);
+            wert= input.nextInt();
+            input.nextLine();
+            
+        }
+        
+        catch (InputMismatchException e) 
+        {
+            System.err.println(e+ msg1);
+        } 
         return wert;
-     } 
+     }
      
      /**
      * Methode readlnLong() dient zum Einlesen von long Werten.
@@ -164,10 +179,20 @@ public class FunktionenDialog
      */
      public long readlnLong(String eingabe)
      {
-         System.out.print(eingabe);
-         long wert = input.nextLong();
-         input.nextLine();
-         return wert;
+        long wert = 0;
+        try 
+        {
+            System.out.print(eingabe);
+            wert= input.nextInt();
+            input.nextLine();
+            
+        }
+        
+        catch (InputMismatchException e) 
+        {
+            System.err.println(e+ msg1);
+        } 
+        return wert;
      }
      
      /**
@@ -177,19 +202,29 @@ public class FunktionenDialog
      */
      public double readlnDouble(String eingabe)
      {
-         System.out.print(eingabe);
-         double wert = input.nextDouble();
-         input.nextLine();
-         return wert;
+        double wert = 0;
+        try 
+        {
+            System.out.print(eingabe);
+            wert= input.nextInt();
+            input.nextLine();
+            
+        }
+        
+        catch (InputMismatchException e) 
+        {
+            System.err.println(e+ msg2);
+        } 
+        return wert;
      }
      
-     
-    /**
+     /**
      * Die Main Methode dient zum starten des interaktiven Dialogs, der zum Testen der Methoden der Klasse Funktionen dient.
+     * @param args Kommandozeilenparameter
      */
-    public static void main (String[]args)
-    {
-     FunktionenDialog dialog = new FunktionenDialog();
-     dialog.run();
+     public static void main (String[]args)
+     {
+         FunktionenDialog dialog = new FunktionenDialog();
+         dialog.run();
     }
 }
