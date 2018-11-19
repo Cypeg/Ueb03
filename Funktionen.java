@@ -2,7 +2,7 @@
 /**
  * Klasse Funktionen
  *
- * @author JKrier, JVogt
+ * @author JKrier, JVogt, TestGit Aenderung 
  * @version Ueb03
  */
 public class Funktionen
@@ -18,7 +18,7 @@ public class Funktionen
 
     /**
      * Erste Funktion: Berechnen der Teilersumme
-     *
+     * 
      * @param  natuerliche Zahl (>=0)
      * @return teilersumme
      */
