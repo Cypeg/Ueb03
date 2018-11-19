@@ -25,13 +25,15 @@ public class Funktionen
     public static int berechneTeilersumme(int y)
     {
         check((y>=0),msg1);
-        int i, teilersumme;      
         
-        for(i =1,teilersumme=0;i*i<y;i++)
-        {
+        int i;
+        int teilersumme;     
+        
+        for(i = 1, teilersumme=0; i*i<y; i++) // ist es nicht unnötig teilersumme auf 0 zu setzen, 
+        {                                     // da bei der initialisierung der variable sowieso die 0 gesetzt wird?
             if (y % i == 0)
             {
-                teilersumme+=i+y/i;
+                teilersumme += i+y/i;
             } 
             
         }
@@ -50,10 +52,10 @@ public class Funktionen
        
        check(((isbn > 0) && (isbn < 999999999) && (s.length()==9)),msg2);
        
-       long summe=0;
-       for(int i=9;i>0;i--)
+       long summe = 0;
+       for(int i=9; i>0; i--)
        {
-           summe +=(isbn % 10) *i;
+           summe += (isbn % 10) *i;
            isbn = isbn/10;
        }
          
